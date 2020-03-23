@@ -1,0 +1,24 @@
+# 数据源
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/expense_manage?serverTimezone=GMT%2B8&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: fuck3148481
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+# 日志配置（开发用）
+logging:
+  level:
+    com:
+      xwork: DEBUG
+# 服务端口
+server:
+  port: 5188
+
+system:
+  default-password: 1234  # 默认密码
+  #  upload-path: e:/gov-manage/upload
+  upload-path: /Users/longder/expense-manage/upload
+
