@@ -1,6 +1,7 @@
 package com.xwork.expense.security;
 
-import com.longder.gov.entity.po.SysUser;
+
+import com.xwork.expense.entity.po.SysUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
