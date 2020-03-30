@@ -1,5 +1,6 @@
 package com.xwork.expense.entity.po;
 
+import com.xwork.expense.entity.enums.AuditState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,4 +35,10 @@ public class Project extends BaseIdEntity{
      */
     @Column(name = "total_budget_")
     private BigDecimal totalBudget;
+
+    /**
+     * 审核状态
+     */
+    @Column(name = "audit_state_")
+    private AuditState auditState;
 }

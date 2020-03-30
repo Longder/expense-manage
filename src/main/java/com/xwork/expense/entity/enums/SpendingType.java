@@ -10,8 +10,7 @@ public enum SpendingType {
     BUSINESS_TRIP("BUSINESS_TRIP","出差费用"),
     TRANSPORTATION("TRANSPORTATION","交通费"),
     COMMUNICATION("COMMUNICATION","通信费"),
-    OFFICE_SUPPLIES("OFFICE_SUPPLIES","办公用品费")
-    ;
+    OFFICE_SUPPLIES("OFFICE_SUPPLIES","办公用品费");
 
     /**
      * 名称
