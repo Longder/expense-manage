@@ -41,4 +41,10 @@ public class Project extends BaseIdEntity{
      */
     @Column(name = "audit_state_")
     private AuditState auditState;
+
+    /**
+     * 是否激活
+     */
+    @Column(name = "active_")
+    private Boolean active;
 }

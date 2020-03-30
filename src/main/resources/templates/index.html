@@ -29,9 +29,15 @@
                     </div>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/class/list}" title="用户管理">
+                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="用户管理">
                         <i class="fa fa-user"></i>
                         <span class="nav-label">用户管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_FINANCE')">
+                    <a class="J_menuItem" th:href="@{/admin/project/listForFinance}" title="财务立项管理">
+                        <i class="fa fa-paper-plane"></i>
+                        <span class="nav-label">财务立项管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
@@ -76,7 +82,7 @@
                 </div>
             </nav>
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">选项卡操作
+                <button class="dropdown J_tabClose" data-toggle="dropdown">选项
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
                     <li class=""><a id="refreshTab">刷新当前选项卡</a>
@@ -102,7 +108,7 @@
                     data-id="dashboard"></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">Chloe出品</a>
+            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">网站备案</a>
             </div>
         </div>
     </div>

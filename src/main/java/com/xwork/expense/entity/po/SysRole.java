@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public enum SysRole implements GrantedAuthority {
     ROLE_ADMIN("ROLE_ADMIN","管理员","系统管理员"),
-    ROLE_FINANCE("ROLE_FINANCE","财务","财务"),
+    ROLE_FINANCE("ROLE_FINANCE","会计","会计"),
     ROLE_CASHIER("ROLE_CASHIER","出纳","出纳"),
     ROLE_CHECK_LEVEL1("ROLE_CHECK_LEVEL1","一级审批","一级审批"),
     ROLE_CHECK_LEVEL2("ROLE_CHECK_LEVEL2","二级审批","二级审批"),

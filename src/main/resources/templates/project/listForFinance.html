@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>项目列表</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <span class="input-group-btn">
+                        <input type="button" class="btn btn-success" data-toggle="modal"
+                               data-target="#projectModal"
+                               onclick="openModal('/admin/project/initAudit','projectModal')"
+                               value="新增立项申请"/>
+                        </span>
+                        </div>
+                        <div class="col-sm-9">
+                        </div>
+                    </div>
+                    <div class="table table-bordered table-hover">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>登录名</th>
+                                <th>姓名</th>
+                                <th>角色</th>
+                                <!--                                <th>操作</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="projectModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+</body>
+</html>

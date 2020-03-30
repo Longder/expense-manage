@@ -1,7 +1,9 @@
 package com.xwork.expense.entity.po;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "SYS_USER_ROLE")
+@NoArgsConstructor
+@AllArgsConstructor
 public class SysUserRole extends BaseIdEntity implements GrantedAuthority {
 
     /**
