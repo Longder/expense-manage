@@ -5,7 +5,7 @@
                 <span aria-hidden="true">×</span>
                 <span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title">报销申请</h4>
+            <h4 class="modal-title">报销审批</h4>
         </div>
         <small class="font-bold">
             <div class="modal-body">
@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
-                                <form id="join-project-form" method="post" class="form-horizontal" th:action="@{/admin/expense/joinProject}">
+                                <form id="join-project-form" method="post" class="form-horizontal" th:action="@{/admin/expense/audit}">
                                     <input type="hidden" th:value="${apply.id}" name="expenseApplyId"/>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
@@ -51,25 +51,20 @@
                                         <label class="col-sm-2 control-label">关联项目<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-10">
-                                            <select id="project-select" class="form-control">
-                                                <option value="">请选择</option>
-                                                <option th:each="proejct:${projects}" th:value="${proejct.id}" th:text="${proejct.name}"></option>
-                                            </select>
+                                            <input type="text" class="form-control" th:value="${apply.spendingDetail.project.name}" readonly/>
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">项目支出详情<span
+                                        <label class="col-sm-2 control-label">所属项目支出<span
                                                 class="text-danger">*</span></label>
                                         <div class="col-sm-10">
-                                            <select id="spending-detail-id" class="form-control" name="spendingDetailId">
-                                                <option value="">请先选择项目</option>
-                                            </select>
+                                            <input type="text" class="form-control" th:value="${apply.spendingDetail.type.displayName}" readonly/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
-                                            <button class="btn btn-success" type="submit">确定关联</button>
+                                            <button onclick="return confirm('确定审批这笔报销申请吗？')" class="btn btn-success" type="submit">审核</button>
                                             <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
                                         </div>
                                     </div>
@@ -83,34 +78,4 @@
     </div>
 </div>
 <script>
-    $(function () {
-        //表单验证
-        $("#join-project-form").validate({
-            rules:{
-                spendingDetailId:"required"
-            },messages:{
-                spendingDetailId:"请选择待关联的项目开支详情"
-            }
-        });
-
-        //project-select改变触发
-        $("#project-select").change(function(){
-            if($("#project-select").val()!==''){
-                $.ajax({
-                    type: "post",
-                    url: "/admin/project/listDetail",
-                    data: {projectId: $("#project-select").val()},
-                    async: false,
-                    success: function (data) {
-                        $("#spending-detail-id").empty();
-                        for(var i=0;i<data.length;i++){
-                            var option = $("<option value='"+data[i].id+"'>"+data[i].typeName+"</option>");
-                            $("#spending-detail-id").append(option);
-                        }
-
-                    }
-                });
-            }
-        });
-    });
 </script>

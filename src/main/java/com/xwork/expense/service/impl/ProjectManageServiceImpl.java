@@ -133,7 +133,10 @@ public class ProjectManageServiceImpl implements ProjectManageService {
      */
     @Override
     public List<SpendingDetail> listSpendingDetail(Long projectId) {
-        return spendingDetailRepository.listByProjectId(projectId);
+        List<SpendingDetail> detailList = spendingDetailRepository.listByProjectId(projectId);
+        detailList.forEach(detail-> detail.setTypeName(detail.getType().getDisplayName()));
+        //封装类型展示名称
+        return detailList;
     }
 
 }

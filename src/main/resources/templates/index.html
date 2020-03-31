@@ -52,6 +52,18 @@
                         <span class="nav-label">财务立项审批</span>
                     </a>
                 </li>
+                <li sec:authorize="hasAnyRole('ROLE_AUDIT_LEVEL1','ROLE_AUDIT_LEVEL2','ROLE_AUDIT_LEVEL3')">
+                    <a class="J_menuItem" th:href="@{/admin/expense/listForAudit}" title="报销审批">
+                        <i class="fa fa-money"></i>
+                        <span class="nav-label">报销审批</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_CASHIER')">
+                    <a class="J_menuItem" th:href="@{/admin/expense/listForCashier}" title="待支付申请">
+                        <i class="fa fa-edit"></i>
+                        <span class="nav-label">待支付申请</span>
+                    </a>
+                </li>
                 <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
                     <a class="J_menuItem" th:href="@{/admin/expense/listForEmployee}" title="报销申请管理">
                         <i class="fa fa-building"></i>

@@ -1,5 +1,6 @@
 package com.xwork.expense.service;
 
+import com.xwork.expense.entity.dto.ExpensePayDto;
 import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.po.ExpenseApply;
 
@@ -39,4 +40,28 @@ public interface ExpenseManageService {
      * @param joinProjectDto
      */
     void joinProject(JoinProjectDto joinProjectDto);
+
+    /**
+     * 审核用的报销申请列表
+     * @return
+     */
+    List<ExpenseApply> listForAudit();
+
+    /**
+     * 审核报销申请
+     * @param expenseApplyId
+     */
+    void auditExpenseApply(Long expenseApplyId);
+
+    /**
+     * 出纳查看的待支付的申请列表
+     * @return
+     */
+    List<ExpenseApply> listForCashier();
+
+    /**
+     * 支付报销
+     * @param expensePayDto
+     */
+    void payExpense(ExpensePayDto expensePayDto);
 }

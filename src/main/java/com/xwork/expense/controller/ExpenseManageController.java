@@ -1,6 +1,8 @@
 package com.xwork.expense.controller;
 
+import com.xwork.expense.entity.dto.ExpensePayDto;
 import com.xwork.expense.entity.dto.JoinProjectDto;
+import com.xwork.expense.entity.enums.PayWay;
 import com.xwork.expense.entity.po.ExpenseApply;
 import com.xwork.expense.service.ExpenseManageService;
 import com.xwork.expense.service.ProjectManageService;
@@ -62,6 +64,11 @@ public class ExpenseManageController {
         return "redirect:/admin/expense/listForEmployee";
     }
 
+    /**
+     * 会计查看的报销申请列表，待关联的项目
+     * @param model
+     * @return
+     */
     @GetMapping("/listForFinance")
     public String listExpenseApplyForFinance(Model model) {
         model.addAttribute("list", expenseManageService.listForFinance());
@@ -89,7 +96,73 @@ public class ExpenseManageController {
      */
     @PostMapping("/joinProject")
     public String joinProject(JoinProjectDto joinProjectDto){
+        expenseManageService.joinProject(joinProjectDto);
         return "redirect:/admin/expense/listForFinance";
+    }
+
+    /**
+     * 审批用的报销申请列表
+     * @return
+     */
+    @GetMapping("/listForAudit")
+    public String listForAudit(Model model){
+        model.addAttribute("list",expenseManageService.listForAudit());
+        return "expense/list-for-audit";
+    }
+
+    /**
+     * 去审核报销
+     * @param expenseApplyId
+     * @return
+     */
+    @GetMapping("/toAudit")
+    public String toAuditApply(Long expenseApplyId,Model model){
+        model.addAttribute("apply", expenseManageService.getOneExpenseApply(expenseApplyId));
+        return "expense/audit-expense-modal";
+    }
+
+    /**
+     * 审核报销
+     * @param expenseApplyId
+     * @return
+     */
+    @PostMapping("/audit")
+    public String auditApply(Long expenseApplyId){
+        expenseManageService.auditExpenseApply(expenseApplyId);
+        return "redirect:/admin/expense/listForAudit";
+    }
+
+    /**
+     * 出纳查看的报销申请列表
+     * @return
+     */
+    @GetMapping("/listForCashier")
+    public String listForCashier(Model model){
+        model.addAttribute("list",expenseManageService.listForCashier());
+        return "expense/list-for-cashier";
+    }
+
+    /**
+     * 去支付费用
+     * @param expenseApplyId
+     * @return
+     */
+    @GetMapping("/toPay")
+    public String toPay(Long expenseApplyId,Model model){
+        model.addAttribute("apply", expenseManageService.getOneExpenseApply(expenseApplyId));
+        model.addAttribute("payWays", PayWay.values());
+        return "expense/pay-modal";
+    }
+
+    /**
+     * 支付报销
+     * @param expensePayDto
+     * @return
+     */
+    @PostMapping("/pay")
+    public String payExpense(ExpensePayDto expensePayDto){
+        expenseManageService.payExpense(expensePayDto);
+        return "redirect:/admin/expense/listForCashier";
     }
 
     /**

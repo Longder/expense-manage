@@ -1,6 +1,7 @@
 package com.xwork.expense.entity.po;
 
 import com.xwork.expense.entity.enums.AuditState;
+import com.xwork.expense.entity.enums.PayWay;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,8 +57,26 @@ public class ExpenseApply extends BaseIdEntity {
     private String applyFilePath;
 
     /**
+     * 是否已支付
+     */
+    @Column(name = "payed_")
+    private Boolean payed = false;
+
+    /**
+     * 支付方式
+     */
+    @Column(name = "pay_way_")
+    private PayWay payWay;
+
+    /**
      * 上传过来的文件
      */
     @Transient
     private MultipartFile file;
+
+    /**
+     * 项目开支详情
+     */
+    @Transient
+    private String projectSpendingDetail;
 }

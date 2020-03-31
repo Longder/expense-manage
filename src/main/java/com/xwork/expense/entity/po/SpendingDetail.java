@@ -29,6 +29,9 @@ public class SpendingDetail extends BaseIdEntity{
     @Column(name = "spending_type_")
     private SpendingType type;
 
+    @Transient
+    private String typeName;
+
     /**
      * 预算金额
      */
