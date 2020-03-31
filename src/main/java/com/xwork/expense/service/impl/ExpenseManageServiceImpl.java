@@ -1,5 +1,6 @@
 package com.xwork.expense.service.impl;
 
+import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.enums.AuditState;
 import com.xwork.expense.entity.po.ExpenseApply;
 import com.xwork.expense.repository.ExpenseApplyRepository;
@@ -95,5 +96,16 @@ public class ExpenseManageServiceImpl implements ExpenseManageService {
             e.printStackTrace();
         }
         return filePath;
+    }
+
+
+    /**
+     * 报销申请关联项目
+     *
+     * @param joinProjectDto
+     */
+    @Override
+    public void joinProject(JoinProjectDto joinProjectDto) {
+        expenseApplyRepository.getOne(joinProjectDto.getExpenseApplyId());
     }
 }

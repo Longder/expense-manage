@@ -1,5 +1,6 @@
 package com.xwork.expense.service;
 
+import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.po.Project;
 import com.xwork.expense.entity.po.SpendingDetail;
 
@@ -52,4 +53,7 @@ public interface ProjectManageService {
      * @return
      */
     List<SpendingDetail> listSpendingDetail(Long projectId);
+
+
+
 }

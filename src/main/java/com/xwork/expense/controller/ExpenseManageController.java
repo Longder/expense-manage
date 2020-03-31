@@ -1,5 +1,6 @@
 package com.xwork.expense.controller;
 
+import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.po.ExpenseApply;
 import com.xwork.expense.service.ExpenseManageService;
 import com.xwork.expense.service.ProjectManageService;
@@ -79,6 +80,16 @@ public class ExpenseManageController {
         model.addAttribute("apply", expenseManageService.getOneExpenseApply(expenseApplyId));
         model.addAttribute("projects",projectManageService.listAllAudited());
         return "expense/join-project-modal";
+    }
+
+    /**
+     * 报销申请关联项目
+     * @param joinProjectDto
+     * @return
+     */
+    @PostMapping("/joinProject")
+    public String joinProject(JoinProjectDto joinProjectDto){
+        return "redirect:/admin/expense/listForFinance";
     }
 
     /**

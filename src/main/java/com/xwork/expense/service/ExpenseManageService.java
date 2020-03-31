@@ -1,5 +1,6 @@
 package com.xwork.expense.service;
 
+import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.po.ExpenseApply;
 
 import java.util.List;
@@ -32,4 +33,10 @@ public interface ExpenseManageService {
      * @return
      */
     ExpenseApply getOneExpenseApply(Long expenseApplyId);
+
+    /**
+     * 报销申请关联项目
+     * @param joinProjectDto
+     */
+    void joinProject(JoinProjectDto joinProjectDto);
 }

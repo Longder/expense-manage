@@ -1,5 +1,6 @@
 package com.xwork.expense.service.impl;
 
+import com.xwork.expense.entity.dto.JoinProjectDto;
 import com.xwork.expense.entity.enums.AuditState;
 import com.xwork.expense.entity.po.Project;
 import com.xwork.expense.entity.po.SpendingDetail;
@@ -134,4 +135,5 @@ public class ProjectManageServiceImpl implements ProjectManageService {
     public List<SpendingDetail> listSpendingDetail(Long projectId) {
         return spendingDetailRepository.listByProjectId(projectId);
     }
+
 }
