@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 财务立项，项目
@@ -47,4 +49,10 @@ public class Project extends BaseIdEntity{
      */
     @Column(name = "active_")
     private Boolean active;
+
+    /**
+     * 项目预算详情集合，不持久化，dto用
+     */
+    @Transient
+    private List<SpendingDetail> detailList;
 }

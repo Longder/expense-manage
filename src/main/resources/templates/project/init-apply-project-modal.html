@@ -1,0 +1,123 @@
+<div class="modal-dialog modal-lg" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">财务立项申请</h4>
+        </div>
+        <small class="font-bold">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <form id="apply-project-form" method="post" class="form-horizontal" th:action="@{/admin/project/applyProject}">
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">立项名称<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">项目描述<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">预算开支详情<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <button type="button" class="btn btn-success" id="add-detail">添加</button>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>类型</th>
+                                                    <th>预算金额</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="detail-body">
+                                                <tr>
+                                                    <td>
+                                                        <select required class="form-control" name="detailList[0].type">
+                                                            <option th:each="type:${spendingTypes}" th:value="${type.key}" th:text="${type.value}"></option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" required class="form-control" name="detailList[0].budget"/>
+                                                    </td>
+                                                    <td>
+<!--                                                        <button type="button" class="btn btn-danger btn-sm">删除</button>-->
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-success" type="submit">申请</button>
+                                            <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </div>
+    <script th:inline="javascript">
+        var spendingTypes = [[${spendingTypes}]];
+        var index = 1;
+        $(function () {
+            //构建select
+            var select = $('<select required class="form-control"></select>');
+            for (var key in spendingTypes) {
+                var option = $("<option value='" + key + "'>" + spendingTypes[key] + "</option>");
+                select.append(option);
+            }
+
+            //添加按钮点击
+            $("#add-detail").click(function(){
+                select.attr("name","detailList["+index+"].type");
+                var tr = $("<tr><td>"+select[0].outerHTML+"</td><td><input required class='form-control' type='number' name='detailList["+index+"].budget'/></td>" +
+                    "<td><button type='button' class='delete-btn btn btn-sm btn-danger' onclick='deleteDetail(this)'>删除</button></td></tr>");
+                $("#detail-body").append(tr);
+                index++;
+            });
+
+
+            //表单验证
+            $("#apply-project-form").validate({
+                rules: {
+                    name: "required",
+                    description:"required"
+                }, messages: {
+                    name: "请填写项目名称",
+                    description:"请填写项目描述"
+                },
+                onfocusout: false
+            });
+
+        });
+
+        /**
+         * 删除按钮点击方法
+         */
+        function deleteDetail(btn){
+            $(btn).parent().parent().remove();
+            index--;
+        }
+    </script>
+</div>

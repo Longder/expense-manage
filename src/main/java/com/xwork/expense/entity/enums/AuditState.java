@@ -8,9 +8,10 @@ import lombok.Getter;
 @Getter
 public enum AuditState {
     PRE_AUDIT("PRE_AUDIT", "待审核"),
-    AUDIT_L1("AUDIT_L1", "初审通过"),
-    AUDIT_L2("AUDIT_L2", "复审通过"),
-    AUDIT_L3("AUDIT_L3", "核定通过");
+    FINANCE_AUDIT("FINANCE_AUDIT","已关联项目"),
+    AUDIT_L1("AUDIT_L1", "一级审核通过"),
+    AUDIT_L2("AUDIT_L2", "二级审核通过"),
+    AUDIT_L3("AUDIT_L3", "三级审核通过");
     /**
      * 名称
      */

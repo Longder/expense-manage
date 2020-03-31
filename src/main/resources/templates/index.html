@@ -40,6 +40,24 @@
                         <span class="nav-label">财务立项管理</span>
                     </a>
                 </li>
+                <li sec:authorize="hasRole('ROLE_FINANCE')">
+                    <a class="J_menuItem" th:href="@{/admin/expense/listForFinance}" title="报销项目关联">
+                        <i class="fa fa-anchor"></i>
+                        <span class="nav-label">报销项目关联</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_AUDIT_LEVEL1','ROLE_AUDIT_LEVEL2','ROLE_AUDIT_LEVEL3')">
+                    <a class="J_menuItem" th:href="@{/admin/project/listForAudit}" title="财务立项审批">
+                        <i class="fa fa-check"></i>
+                        <span class="nav-label">财务立项审批</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <a class="J_menuItem" th:href="@{/admin/expense/listForEmployee}" title="报销申请管理">
+                        <i class="fa fa-building"></i>
+                        <span class="nav-label">报销申请管理</span>
+                    </a>
+                </li>
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
                     <a href="#" title="自我测验">
                         <i class="fa fa-book"></i>
@@ -108,8 +126,6 @@
                     data-id="dashboard"></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">网站备案</a>
-            </div>
         </div>
     </div>
     <!--右侧部分结束-->

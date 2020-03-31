@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>待关联项目的报销申请</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table table-bordered table-hover">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>名称</th>
+                                <th>原因</th>
+                                <th>审核状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="expense:${list}">
+                                <td th:text="${expenseStat.index+1}"></td>
+                                <td th:text="${expense.name}"></td>
+                                <td th:text="${expense.reason}"></td>
+                                <td th:text="${expense.auditState.displayName}"></td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#expenseModal"
+                                            th:onclick="'openModal(\'/admin/expense/toJoinProject?expenseApplyId='+${expense.id}+'\',\'expenseModal\')'">
+                                        关联项目
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="expenseModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+</body>
+</html>

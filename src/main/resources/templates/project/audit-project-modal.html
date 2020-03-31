@@ -1,0 +1,88 @@
+<div class="modal-dialog modal-lg" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">财务立项申请</h4>
+        </div>
+        <small class="font-bold">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <form id="apply-project-form" method="post" class="form-horizontal" th:action="@{/admin/project/audit}">
+                                    <input type="hidden" name="projectId" th:value="${project.id}"/>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">立项名称<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly th:value="${project.name}"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">总预算<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" readonly th:value="${project.totalBudget}"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">当前审核状态<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly th:value="${project.auditState.displayName}"/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">项目描述<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" th:text="${project.description}" readonly></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">预算开支详情<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>类型</th>
+                                                    <th>预算金额</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="detail:${project.detailList}">
+                                                    <td th:text="${detailStat.index+1}"></td>
+                                                    <td th:text="${detail.type.displayName}"></td>
+                                                    <td th:text="${detail.budget}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button onclick="return confirm('确定审批该项目吗？')" class="btn btn-success" type="submit">审批</button>
+                                            <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </div>
+</div>

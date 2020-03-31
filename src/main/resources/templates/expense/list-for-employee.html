@@ -8,16 +8,16 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>用户列表</h5>
+                    <h5>报销申请列表</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-3">
                         <span class="input-group-btn">
                         <input type="button" class="btn btn-success" data-toggle="modal"
-                               data-target="#userModal"
-                               onclick="openModal('/admin/user/toAdd','userModal')"
-                               value="添加用户"/>
+                               data-target="#expenseModal"
+                               onclick="openModal('/admin/expense/initApply','expenseModal')"
+                               value="申请报销"/>
                         </span>
                         </div>
                         <div class="col-sm-9">
@@ -28,22 +28,20 @@
                             <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>登录名</th>
-                                <th>姓名</th>
-                                <th>角色</th>
-<!--                                <th>操作</th>-->
+                                <th>名称</th>
+                                <th>原因</th>
+                                <th>审核状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="user:${list}">
-                                <td th:text="${userStat.index+1}"></td>
-                                <td th:text="${user.loginName}"></td>
-                                <td th:text="${user.name}"></td>
-                                <td th:text="${user.role.displayName}"></td>
-<!--                                <td>-->
-<!--                                    <button></button>-->
-<!--                                </td>-->
-                            </tr>
+                                <tr th:each="expense:${list}">
+                                    <td th:text="${expenseStat.index+1}"></td>
+                                    <td th:text="${expense.name}"></td>
+                                    <td th:text="${expense.reason}"></td>
+                                    <td th:text="${expense.auditState.displayName}"></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -52,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal inmodal fade" id="expenseModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
 </body>
