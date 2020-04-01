@@ -31,7 +31,7 @@
                                 <th>登录名</th>
                                 <th>姓名</th>
                                 <th>角色</th>
-<!--                                <th>操作</th>-->
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,9 +40,10 @@
                                 <td th:text="${user.loginName}"></td>
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.role.displayName}"></td>
-<!--                                <td>-->
-<!--                                    <button></button>-->
-<!--                                </td>-->
+                                <td>
+                                    <a onclick="return confirm('确定删除该用户吗？')" class="btn btn-sm btn-danger"
+                                       th:href="@{'/admin/user/delete/'+${user.id}}">删除</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

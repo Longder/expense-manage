@@ -68,4 +68,15 @@ public class UserMangeServiceImpl implements UserMangeService {
             sysUserRoleRepository.save(userRole);
         }
     }
+
+    /**
+     * 删除一个用户
+     *
+     * @param sysUserId
+     */
+    @Override
+    @Transactional
+    public void deleteOneUser(Long sysUserId) {
+        sysUserRepository.deleteById(sysUserId);
+    }
 }

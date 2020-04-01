@@ -40,7 +40,13 @@
                                     <td th:text="${expense.name}"></td>
                                     <td th:text="${expense.reason}"></td>
                                     <td th:text="${expense.auditState.displayName}"></td>
-                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#expenseModal"
+                                                th:onclick="'openModal(\'/admin/expense/detail?expenseApplyId='+${expense.id}+'\',\'expenseModal\')'">
+                                            详情
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

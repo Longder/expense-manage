@@ -27,4 +27,10 @@ public interface UserMangeService {
      * @param sysRole
      */
     void saveOneUser(SysUser sysUser, SysRole sysRole);
+
+    /**
+     * 删除一个用户
+     * @param sysUserId
+     */
+    void deleteOneUser(Long sysUserId);
 }

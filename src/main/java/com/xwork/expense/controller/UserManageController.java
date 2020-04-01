@@ -5,10 +5,7 @@ import com.xwork.expense.entity.po.SysUser;
 import com.xwork.expense.service.UserMangeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -53,9 +50,25 @@ public class UserManageController {
         return userMangeService.checkLoginName(loginName);
     }
 
+    /**
+     * 添加用户
+     * @param sysUser
+     * @return
+     */
     @PostMapping("/add")
     public String add(SysUser sysUser){
         userMangeService.saveOneUser(sysUser,sysUser.getRole());
+        return "redirect:/admin/user/list";
+    }
+
+    /**
+     * 删除用户
+     * @param sysUserId
+     * @return
+     */
+    @GetMapping("/delete/{sysUserId}")
+    public String delete(@PathVariable("sysUserId") Long sysUserId){
+        userMangeService.deleteOneUser(sysUserId);
         return "redirect:/admin/user/list";
     }
 }
