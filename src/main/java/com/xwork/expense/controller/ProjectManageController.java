@@ -78,37 +78,59 @@ public class ProjectManageController {
 
     /**
      * 去审批项目
+     *
      * @param projectId
      * @return
      */
     @GetMapping("/toAudit")
-    public String toAuditProject(Long projectId,Model model){
-        model.addAttribute("project",projectManageService.getOneProject(projectId));
+    public String toAuditProject(Long projectId, Model model) {
+        model.addAttribute("project", projectManageService.getOneProject(projectId));
         return "project/audit-project-modal";
     }
 
     /**
      * 审核项目
+     *
      * @param projectId
      * @return
      */
     @PostMapping("/audit")
-    public String auditProject(Long projectId){
-        log.info("projectId:"+projectId);
+    public String auditProject(Long projectId) {
+        log.info("projectId:" + projectId);
         projectManageService.auditProject(projectId);
         return "redirect:/admin/project/listForAudit";
     }
 
     /**
      * 项目开支详情
+     *
      * @param projectId
      * @return
      */
     @PostMapping("/listDetail")
     @ResponseBody
-    public List<SpendingDetail> listDetail(Long projectId){
+    public List<SpendingDetail> listDetail(Long projectId) {
         return projectManageService.listSpendingDetail(projectId);
     }
 
+    /**
+     * 项目信息列表，只查询已经审批过的项目，主要是查看用
+     *
+     * @return
+     */
+    @GetMapping("/listForInfo")
+    public String listForInfo(Model model) {
+        model.addAttribute("list", projectManageService.listAllAudited());
+        return "project/list-for-info";
+    }
 
+    /**
+     * 项目报销详情
+     * @return
+     */
+    @GetMapping("/projectDetail")
+    public String projectExpenseDetail(Model model,Long projectId){
+        model.addAttribute("project", projectManageService.getOneProject(projectId));
+        return "project/detail-modal";
+    }
 }

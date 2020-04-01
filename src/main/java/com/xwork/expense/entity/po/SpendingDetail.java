@@ -37,4 +37,10 @@ public class SpendingDetail extends BaseIdEntity{
      */
     @Column(name = "budget_")
     private BigDecimal budget;
+
+    /**
+     * 已报销总额 不持久化
+     */
+    @Transient
+    private BigDecimal expenseMoney;
 }

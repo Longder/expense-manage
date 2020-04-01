@@ -18,7 +18,7 @@
                                 <span class="clear">
                                <span class="block m-t-xs">
                                    <strong class="font-bold">
-                                   您好！欢迎登录
+                                   您好！<span th:text="${userName}"></span>
                                    </strong>
                                </span>
                                 </span>
@@ -70,20 +70,17 @@
                         <span class="nav-label">报销申请管理</span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a href="#" title="自我测验">
-                        <i class="fa fa-book"></i>
-                        <span class="nav-label">自我测验</span>
-                        <span class="fa arrow"></span>
+                <li sec:authorize="hasAnyRole('ROLE_CASHIER','ROLE_FINANCE','ROLE_AUDIT_LEVEL1','ROLE_AUDIT_LEVEL2','ROLE_AUDIT_LEVEL3')">
+                    <a class="J_menuItem" th:href="@{/admin/expense/listForInfo}" title="报销信息查看">
+                        <i class="fa fa-inbox"></i>
+                        <span class="nav-label">报销信息查看</span>
                     </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" th:href="@{/admin/selfExam/choose}">开始自测</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" th:href="@{/admin/selfExam/list}" href="#">自测结果</a>
-                        </li>
-                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_FINANCE','ROLE_AUDIT_LEVEL1','ROLE_AUDIT_LEVEL2','ROLE_AUDIT_LEVEL3')">
+                    <a class="J_menuItem" th:href="@{/admin/project/listForInfo}" title="已过审项目信息">
+                        <i class="fa fa-pencil"></i>
+                        <span class="nav-label">已过审项目信息</span>
+                    </a>
                 </li>
             </ul>
         </div>

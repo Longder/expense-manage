@@ -44,7 +44,17 @@ public class ExpenseManageServiceImpl implements ExpenseManageService {
      */
     @Override
     public List<ExpenseApply> listAllExpenseApply() {
-        return expenseApplyRepository.findAll();
+        List<ExpenseApply> expenseApplyList = expenseApplyRepository.findAll();
+        //封装关联项目详情
+        assert expenseApplyList != null;
+        expenseApplyList.forEach(apply-> {
+            if(apply.getSpendingDetail()!=null){
+                apply.setProjectSpendingDetail(apply.getSpendingDetail().getProject().getName()
+                        +"-"
+                        +apply.getSpendingDetail().getType().getDisplayName());
+            }
+        });
+        return expenseApplyList;
     }
 
     /**

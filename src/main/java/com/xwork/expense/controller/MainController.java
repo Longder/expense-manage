@@ -1,7 +1,10 @@
 package com.xwork.expense.controller;
 
+import com.xwork.expense.entity.po.SysUser;
+import com.xwork.expense.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -34,8 +37,12 @@ public class MainController {
      * @return
      */
     @GetMapping("/admin/index")
-    public String adminIndex(){
+    public String adminIndex(Model model){
         log.debug("去后台主页");
+        //当前用户
+        SysUser currentUser = SecurityUtil.getCurrentUser();
+        assert currentUser != null;
+        model.addAttribute("userName",currentUser.getName());
         return "index";
     }
 

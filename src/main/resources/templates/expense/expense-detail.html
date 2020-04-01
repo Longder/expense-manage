@@ -1,0 +1,82 @@
+<div class="modal-dialog modal-lg" xmlns:th="http://www.thymeleaf.org">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">支付</h4>
+        </div>
+        <small class="font-bold">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="form-horizontal">
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">申请名称<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly th:value="${apply.name}" />
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">申请原因<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" readonly th:text="${apply.reason}"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">报销金额<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" th:value="${apply.money}" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">关联项目<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" th:value="${apply.spendingDetail.project.name}" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">所属项目支出<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" th:value="${apply.spendingDetail.type.displayName}" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">支付方式<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" th:value="${apply.payWay.displayName}" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-white" type="button" data-dismiss="modal">关闭</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </small>
+    </div>
+</div>
+<script>
+
+</script>

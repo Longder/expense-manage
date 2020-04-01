@@ -6,6 +6,7 @@ import com.xwork.expense.entity.po.Project;
 import com.xwork.expense.entity.po.SpendingDetail;
 import com.xwork.expense.entity.po.SysRole;
 import com.xwork.expense.entity.po.SysUser;
+import com.xwork.expense.repository.ExpenseApplyRepository;
 import com.xwork.expense.repository.ProjectRepository;
 import com.xwork.expense.repository.SpendingDetailRepository;
 import com.xwork.expense.security.SecurityUtil;
@@ -25,6 +26,8 @@ public class ProjectManageServiceImpl implements ProjectManageService {
     private ProjectRepository projectRepository;
     @Resource
     private SpendingDetailRepository spendingDetailRepository;
+    @Resource
+    private ExpenseApplyRepository expenseApplyRepository;
 
     /**
      * 查询所有项目
@@ -91,6 +94,12 @@ public class ProjectManageServiceImpl implements ProjectManageService {
         //封装开支详情
         List<SpendingDetail> detailList = spendingDetailRepository.listByProjectId(projectId);
         project.setDetailList(detailList);
+        //封装已经报销的总额
+        project.getDetailList().forEach(detail -> {
+            //查询这类报销的已经支付的总额
+            BigDecimal expenseMoney = expenseApplyRepository.sumBySpendingDetailId(detail.getId());
+            detail.setExpenseMoney(expenseMoney==null?BigDecimal.ZERO:expenseMoney);
+        });
         return project;
     }
 
@@ -134,7 +143,7 @@ public class ProjectManageServiceImpl implements ProjectManageService {
     @Override
     public List<SpendingDetail> listSpendingDetail(Long projectId) {
         List<SpendingDetail> detailList = spendingDetailRepository.listByProjectId(projectId);
-        detailList.forEach(detail-> detail.setTypeName(detail.getType().getDisplayName()));
+        detailList.forEach(detail -> detail.setTypeName(detail.getType().getDisplayName()));
         //封装类型展示名称
         return detailList;
     }

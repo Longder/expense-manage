@@ -166,6 +166,29 @@ public class ExpenseManageController {
     }
 
     /**
+     * 报销申请信息列表查看，主要是查看功能详情的，所有都能查询
+     * @param model
+     * @return
+     */
+    @GetMapping("/listForInfo")
+    public String listForInfo(Model model){
+        model.addAttribute("list",expenseManageService.listAllExpenseApply());
+        return "expense/list-for-info";
+    }
+
+    /**
+     * 报销详情
+     * @param expenseApplyId
+     * @return
+     */
+    @GetMapping("/detail")
+    public String expenseDetail(Long expenseApplyId,Model model){
+        model.addAttribute("apply", expenseManageService.getOneExpenseApply(expenseApplyId));
+        return "expense/expense-detail";
+    }
+
+
+    /**
      * 下载上传的文件
      *
      * @param response
