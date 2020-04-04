@@ -11,7 +11,9 @@ public enum AuditState {
     FINANCE_AUDIT("FINANCE_AUDIT","已关联项目"),
     AUDIT_L1("AUDIT_L1", "一级审核通过"),
     AUDIT_L2("AUDIT_L2", "二级审核通过"),
-    AUDIT_L3("AUDIT_L3", "三级审核通过");
+    AUDIT_L3("AUDIT_L3", "三级审核通过"),
+    AUDIT_REFUSE("AUDIT_REFUSE","审核不通过");
+
     /**
      * 名称
      */

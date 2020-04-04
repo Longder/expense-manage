@@ -166,17 +166,21 @@ public class ExpenseManageServiceImpl implements ExpenseManageService {
      */
     @Override
     @Transactional
-    public void auditExpenseApply(Long expenseApplyId) {
+    public void auditExpenseApply(Long expenseApplyId,String result) {
         ExpenseApply expenseApply = expenseApplyRepository.getOne(expenseApplyId);
-        //查看当前用户
-        SysUser currentUser = SecurityUtil.getCurrentUser();
-        assert currentUser != null;
-        if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL1) {//一级审批
-            expenseApply.setAuditState(AuditState.AUDIT_L1);
-        } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL2) {//二级审批
-            expenseApply.setAuditState(AuditState.AUDIT_L2);
-        } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL3) {//三级审批
-            expenseApply.setAuditState(AuditState.AUDIT_L3);
+        if("YES".equalsIgnoreCase(result)){
+            //查看当前用户
+            SysUser currentUser = SecurityUtil.getCurrentUser();
+            assert currentUser != null;
+            if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL1) {//一级审批
+                expenseApply.setAuditState(AuditState.AUDIT_L1);
+            } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL2) {//二级审批
+                expenseApply.setAuditState(AuditState.AUDIT_L2);
+            } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL3) {//三级审批
+                expenseApply.setAuditState(AuditState.AUDIT_L3);
+            }
+        }else if("NO".equalsIgnoreCase(result)){
+            expenseApply.setAuditState(AuditState.AUDIT_REFUSE);
         }
         expenseApplyRepository.save(expenseApply);
     }

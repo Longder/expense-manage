@@ -39,7 +39,7 @@ public interface ProjectManageService {
      * 审批项目
      * @param projectId
      */
-    void auditProject(Long projectId);
+    void auditProject(Long projectId,String result);
 
     /**
      * 查询已经三级审批通过的所有项目

@@ -43,7 +43,11 @@
                                 <td th:text="${project.totalBudget}"></td>
                                 <td th:text="${project.auditState.displayName}"></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm">预算详情</button>
+                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#projectModal"
+                                            th:onclick="'openModal(\'/admin/project/projectDetail?projectId='+${project.id}+'\',\'projectModal\')'">
+                                        预算详情
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>

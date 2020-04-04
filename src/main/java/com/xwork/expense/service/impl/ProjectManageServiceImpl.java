@@ -110,16 +110,21 @@ public class ProjectManageServiceImpl implements ProjectManageService {
      */
     @Override
     @Transactional
-    public void auditProject(Long projectId) {
+    public void auditProject(Long projectId,String result) {
         Project project = projectRepository.getOne(projectId);
-        //查看当前用户
-        SysUser currentUser = SecurityUtil.getCurrentUser();
-        if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL1) {//一级审批
-            project.setAuditState(AuditState.AUDIT_L1);
-        } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL2) {//二级审批
-            project.setAuditState(AuditState.AUDIT_L2);
-        } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL3) {//三级审批
-            project.setAuditState(AuditState.AUDIT_L3);
+        //查看审核结果
+        if("YES".equalsIgnoreCase(result)){
+            //查看当前用户
+            SysUser currentUser = SecurityUtil.getCurrentUser();
+            if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL1) {//一级审批
+                project.setAuditState(AuditState.AUDIT_L1);
+            } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL2) {//二级审批
+                project.setAuditState(AuditState.AUDIT_L2);
+            } else if (currentUser.getRoles().get(0).getRole() == SysRole.ROLE_AUDIT_LEVEL3) {//三级审批
+                project.setAuditState(AuditState.AUDIT_L3);
+            }
+        }else if("NO".equalsIgnoreCase(result)){
+            project.setAuditState(AuditState.AUDIT_REFUSE);
         }
         projectRepository.save(project);
     }

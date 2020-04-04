@@ -51,7 +51,7 @@ public interface ExpenseManageService {
      * 审核报销申请
      * @param expenseApplyId
      */
-    void auditExpenseApply(Long expenseApplyId);
+    void auditExpenseApply(Long expenseApplyId,String result);
 
     /**
      * 出纳查看的待支付的申请列表

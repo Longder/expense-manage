@@ -127,8 +127,8 @@ public class ExpenseManageController {
      * @return
      */
     @PostMapping("/audit")
-    public String auditApply(Long expenseApplyId){
-        expenseManageService.auditExpenseApply(expenseApplyId);
+    public String auditApply(Long expenseApplyId,String result){
+        expenseManageService.auditExpenseApply(expenseApplyId,result);
         return "redirect:/admin/expense/listForAudit";
     }
 

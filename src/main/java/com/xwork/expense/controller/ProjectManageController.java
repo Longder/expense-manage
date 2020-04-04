@@ -95,9 +95,9 @@ public class ProjectManageController {
      * @return
      */
     @PostMapping("/audit")
-    public String auditProject(Long projectId) {
+    public String auditProject(Long projectId,String result) {
         log.info("projectId:" + projectId);
-        projectManageService.auditProject(projectId);
+        projectManageService.auditProject(projectId,result);
         return "redirect:/admin/project/listForAudit";
     }
 
